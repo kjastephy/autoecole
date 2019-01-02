@@ -310,7 +310,6 @@ session_start();
         </div>
         <!--/ Stats -->
 
-
         <!-- content Ici le contenu de nos différents liens chargé avec ajax-->
         <div id="content">
           <?php include('contenu.php'); ?>
