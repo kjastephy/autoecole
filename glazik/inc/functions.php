@@ -1,0 +1,4 @@
+<!-- traitement des fonctions -->
+ <?php
+
+ 
