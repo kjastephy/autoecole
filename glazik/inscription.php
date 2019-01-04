@@ -1,4 +1,8 @@
-<?php require 'inc/header.php'; ?>
+<?php 
+
+require 'inc/header.php'; 
+
+?>
 
 <meta name="description" content="Website Generator Description">
 <title>INSCRIPTION</title>
@@ -50,7 +54,7 @@
         <div class="row justify-content-center">
             <div class="media-container-column col-lg-8">
                 <div class="row justify-content-center">
-                    <form id="demandeinscription" class="mbr-form" action="JavaScript: demandeinscription()" method="post">
+                    <form id="demandeinscription" method="post" class="mbr-form" action="JavaScript:demandeinscription()">
 
                         <input type="text" hidden="true" id="option" class="form-control" name="add" value="add" >
 
@@ -146,7 +150,9 @@
          //Redirection
          .done(function(data)
          {
-            if(data['texte']!=""){
+            if(data['message']=="redirection"){
+                $(location).attr("href", "/glazik");
+            }if(data['texte']!=""){
                 $("#info-inscription").empty();
                 $("#form1-1h").empty();
                 $("#good").html(data['message']);

@@ -15,7 +15,8 @@
 
             $donnees=$req->fetch();
 
-            if($donnees==null){
+            if($donnees==null)
+            {
 
                 $req=$bdd->prepare("INSERT INTO clients (civilite,nom,prenom,email,date_naissance,tel1) VALUES (:civilite,:nom,:prenom,:email,:dateNaissance,:tel1)");
                 $req->execute(array(
@@ -27,13 +28,17 @@
                  'tel1'=>$_POST['tel1']
              ));
 
+                sendMail($_POST['email'],"Demande d'inscription","Bonjour {$_POST['nom']}, <br> Vous avez effectué une demande d'inscription sur notre site. Nous traiterons votre demande dans un bref délais.<br>Cordialement,<br><br><br>NB: Merci de ne pas repondre à ce mail");
+
                 $data = array(
                  'texte'=> "Nous vous contacterons par mail, pour vous informer de la validation de votre inscription.",
                  'message'=> "Demande Envoyée"
              );
 
                 echo json_encode($data);
-            }else{
+            }
+            else
+            {
                 $data = array(
                     'texte'=> "",
                     'message'=> "Echec Demande : email existant"
@@ -66,11 +71,32 @@
                 'etat'=>'inscrit'
             ));*/
 
-            $req=$bdd->prepare('UPDATE clients SET etat=:etat WHERE id_Clients=:id');
+
+            $mdpSansHash=Genere_Password(10);
+            $loginUser=$_POST['email'];
+
+            $req=$bdd->prepare('UPDATE clients SET etat=:etat,login=:login,mot_De_Passe=:mdp WHERE id_Clients=:id');
             $req->execute(array(
                 'id'=>$_POST['id'],
+                'login'=>$loginUser,
+                'mdp'=>password_hash($mdpSansHash,PASSWORD_DEFAULT),
                 'etat'=>'inscrit'
             ));
+
+            $req=$bdd->prepare("INSERT INTO membres (login, mail, mdp, nom, prenom, type) VALUES (:login, :mail, :mdp, :nom, :prenom, :type)");
+
+
+            $req->execute(array(
+               'login'=>$loginUser,
+               'nom'=>$_POST['nom'],
+               'prenom'=>$_POST['prenom'],
+               'mail'=>$_POST['email'],
+               'mdp'=>password_hash($mdpSansHash,PASSWORD_DEFAULT),
+               'type'=>"client"
+           ));
+
+            sendMail($_POST['email'],"Confirmation d'inscription","Bonjour {$_POST['nom']}, <br> Votre demande d'inscription a été confirmée vous trouverez ci-dessous vos accès.<br>login: {$loginUser}<br>mot de passe: {$mdpSansHash}<br><br>Cordialement,<br><br><br>NB: Merci de ne pas repondre à ce mail");
+
 
             $data = array(
                 'notification'=> "$.toast({heading: 'Success',text: 'Opération de modification effectuée avec succes',icon: 'success',position: 'top-right'})",
@@ -86,7 +112,7 @@
             $req->execute(array(
                 'id'=>$_POST['id']
             ));
-            
+
             $data = array(
                 'notification'=> "$.toast({heading: 'Success',text: 'Opération de suppression effectuée avec succes',icon: 'success',position: 'top-right'})",
                 'id'=> "#demandeinscription"
@@ -96,5 +122,6 @@
     }
     else
     {
-        header('location: ../index.php');
+        echo json_encode("redirection");
+        //header('location: ../index.php');
     }
