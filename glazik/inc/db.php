@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('UTC');
 
 try
 {
@@ -15,7 +16,7 @@ catch(Exception $e)
 }
 
 
-function sendMail($email,$object,$contenu){
+function sendMail($email,$object,$contenu,$type){
 
 	$header="MIME-Version: 1.0\r\n";
 	$header.='From:"Glazik Auto"<support@glazikautoecole.com>'."\n";
@@ -26,7 +27,6 @@ function sendMail($email,$object,$contenu){
 	<html>
 	<body>
 	<div align='center'>
-	<img src='http://www.primfx.com/mailing/banniere.png'/>
 	<br />
 	{$contenu}
 	<br />
@@ -37,6 +37,19 @@ function sendMail($email,$object,$contenu){
 	";
 
 	mail($email, $object, $message, $header);
+
+	if($type=="reçu"){
+
+		$req=$bdd->prepare("INSERT INTO email (type,email,nom,prenom,objet,contenu)
+	) VALUES (:type,:email,:nom,:prenom,:objet,:contenu)");
+		$req->execute(array(
+			'email'=>$_POST['email'],
+			'nom'=>$_POST['nom'],
+			'prenom'=>$_POST['prenom'],
+			'objet'=>$_POST['objet'],
+			'contenu'=>$message
+		));
+	}
 
 }
 
@@ -51,7 +64,7 @@ function Genere_Password($size)
 	$characters = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
 
 	$password="";
-	
+
 	for($i=0;$i<$size;$i++)
 	{
 		$password .= ($i%2) ? strtoupper($characters[array_rand($characters)]) : $characters[array_rand($characters)];

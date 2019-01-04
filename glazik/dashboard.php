@@ -1,5 +1,7 @@
 <?php 
 session_start();
+require_once 'inc/db.php'; // Appel fichier connexion bdd
+
 ?>
 
 
@@ -24,7 +26,7 @@ session_start();
         <div class="navbar-container content">
           <div class="collapse navbar-collapse" id="navbar-mobile">
 
-            <!--Logo-->
+            <!--Logo
             <ul class="nav navbar-nav" style="display: flex;align-items: center;justify-content: center; ">
               <a><img class="brand-logo" alt="stack admin logo" src="assetsDashboard/assets/images/logo/logo_ekip.png"></a>
             </ul>
@@ -33,7 +35,8 @@ session_start();
             <ul class="nav navbar-nav mr-auto float-left">
 
               <!--Menu déroulant-->
-              <li class="dropdown nav-item mega-dropdown" style="display: flex;align-items: center; "><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"></a>
+              <li class="dropdown nav-item mega-dropdown" style="display: flex;align-items: center; "><a href="#" data-toggle="dropdown" id="dropdrop"></a>
+
                 <ul class="mega-dropdown-menu dropdown-menu row">
 
                   <li class="col-md-4">
@@ -63,7 +66,7 @@ session_start();
                           <label class="col-sm-3 col-form-label" for="inputEmail1">Email</label>
                           <div class="col-sm-9">
                             <div class="position-relative has-icon-left">
-                              <input class="form-control" type="email" id="inputEmail1" placeholder="<?php echo strtolower($_SESSION['nom'].' '.$_SESSION['prenom'])?>@example.com" name="mail" required>
+                              <input class="form-control" type="email" id="inputEmail1" placeholder="<?php echo strtolower($_SESSION['nom'].' '.$_SESSION['prenom'])?>@example.com" name="email" required>
                               <div class="form-control-position pl-1"><i class="fa fa-envelope-o"></i></div>
                             </div>
                           </div>
@@ -72,7 +75,7 @@ session_start();
                           <label class="col-sm-3 col-form-label" for="inputMessage1">Message</label>
                           <div class="col-sm-9">
                             <div class="position-relative has-icon-left">
-                              <textarea class="form-control" id="inputMessage1" rows="2" placeholder="Votre message" name="messages" required></textarea>
+                              <textarea class="form-control" id="inputMessage1" rows="7" placeholder="Votre message" name="message" required></textarea>
                               <div class="form-control-position pl-1"><i class="fa fa-commenting-o"></i></div>
                             </div>
                           </div>
@@ -89,7 +92,7 @@ session_start();
               </li>
               <!--Fin Menu déroulant-->
 
-              <!--Zoom-->
+              <!--Zoom
               <li class="nav-item d-none d-md-block" style="display: flex;align-items: center; "><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
               <!--Fin Zoom-->
 

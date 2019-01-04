@@ -59,9 +59,8 @@
 
 <!-- END PAGE LEVEL JS-->
 
-<!-- BEGIN PAGE LEVEL JS-->
-<script src="assetsDashboard/assets/js/scripts/forms/select/form-select2.min.js" type="text/javascript"></script>
-<!-- END PAGE LEVEL JS-->
+<script src="assetsDashboard/assets/vendors/js/forms/icheck/icheck.min.js" type="text/javascript"></script>
+<script src="assetsDashboard/assets/js/scripts/forms/checkbox-radio.min.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -70,6 +69,9 @@
         ***********Fonction***********
         ***************************************/
 
+        function msg() {
+          $("#dropdrop").click();
+        }
 
         /**
         *
@@ -99,9 +101,26 @@
 
         /**
         *
-        * @form identifiant du formulaire  
-        * @action lien du post
-        * @modal identifiant du modal
+        * 
+        */
+        function showmail(objet,nom,email,image,contenu)
+        {
+          $("#objetMAIL").empty();
+          $("#nomMAIL").empty();
+          $("#emailMAIL").empty();
+          $("#imageMAIL").empty();
+          $("#contenuMAIL").empty();
+          
+          $("#objetMAIL").html(objet);
+          $("#nomMAIL").html(nom);
+          $("#emailMAIL").html(email);
+          $("#imageMAIL").html(image);
+          $("#contenuMAIL").html(contenu);
+        }
+
+        /**
+        *
+        * 
         */
         function redirigerPage(table,titre,title,ADS,body,head,query)
         {

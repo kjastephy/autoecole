@@ -28,7 +28,7 @@
                  'tel1'=>$_POST['tel1']
              ));
 
-                sendMail($_POST['email'],"Demande d'inscription","Bonjour {$_POST['nom']}, <br> Vous avez effectué une demande d'inscription sur notre site. Nous traiterons votre demande dans un bref délais.<br>Cordialement,<br><br><br>NB: Merci de ne pas repondre à ce mail");
+                sendMail($_POST['email'],"Demande d'inscription","Bonjour {$_POST['nom']}, <br> Vous avez effectué une demande d'inscription sur notre site. Nous traiterons votre demande dans un bref délais.<br>Cordialement,<br><br><br>NB: Merci de ne pas repondre à ce mail","");
 
                 $data = array(
                  'texte'=> "Nous vous contacterons par mail, pour vous informer de la validation de votre inscription.",
@@ -75,11 +75,18 @@
             $mdpSansHash=Genere_Password(10);
             $loginUser=$_POST['email'];
 
-            $req=$bdd->prepare('UPDATE clients SET etat=:etat,login=:login,mot_De_Passe=:mdp WHERE id_Clients=:id');
+            $doc="";
+            $doc.=isset($_POST['cni'])?$_POST['cni'].', ':'';
+            $doc.=isset($_POST['justificatifdomicile'])?$_POST['justificatifdomicile'].', ':'';
+            $doc.=isset($_POST['photo'])?$_POST['photo'].', ':'';
+            $doc.=isset($_POST['permis'])?$_POST['permis'].', ':'';
+
+            $req=$bdd->prepare('UPDATE clients SET etat=:etat,login=:login,mot_De_Passe=:mdp,doc=:doc WHERE id_Clients=:id');
             $req->execute(array(
                 'id'=>$_POST['id'],
                 'login'=>$loginUser,
                 'mdp'=>password_hash($mdpSansHash,PASSWORD_DEFAULT),
+                'doc'=>$doc,
                 'etat'=>'inscrit'
             ));
 
@@ -95,7 +102,7 @@
                'type'=>"client"
            ));
 
-            sendMail($_POST['email'],"Confirmation d'inscription","Bonjour {$_POST['nom']}, <br> Votre demande d'inscription a été confirmée vous trouverez ci-dessous vos accès.<br>login: {$loginUser}<br>mot de passe: {$mdpSansHash}<br><br>Cordialement,<br><br><br>NB: Merci de ne pas repondre à ce mail");
+            sendMail($_POST['email'],"Confirmation d'inscription","Bonjour {$_POST['nom']}, <br> Votre demande d'inscription a été confirmée vous trouverez ci-dessous vos accès.<br>login: {$loginUser}<br>mot de passe: {$mdpSansHash}<br>Merci de nous faire parvenir les documents suivants : {$doc}<br>Cordialement,<br><br><br>NB: Merci de ne pas repondre à ce mail","");
 
 
             $data = array(

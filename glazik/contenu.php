@@ -1,6 +1,5 @@
 <?php 
 //session_start();
-require_once 'inc/db.php'; // Appel fichier connexion bdd
 
 if(isset($_POST['table']) && isset($_POST['titre']) && isset($_POST['ADS']) && isset($_POST['title']) && isset($_POST['body']) && isset($_POST['head'])){
 
@@ -154,12 +153,12 @@ if (!(empty($data)))
                                                             <!-- Button trigger modal modifier -->
                                                             <a href="#" class="btn btn-float btn-round btn-secondary" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'modifier' ?>"><i class="fa fa-pencil-square-o
 
-                                                             f044"></i></a>
+                                                               f044"></i></a>
 
-                                                             <!-- Button trigger modal supprimer-->
-                                                             <a href="#" class="btn btn-float btn-round btn-danger" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'supprimer' ?>"><i class="fa fa-trash"></i></a>
+                                                               <!-- Button trigger modal supprimer-->
+                                                               <a href="#" class="btn btn-float btn-round btn-danger" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'supprimer' ?>"><i class="fa fa-trash"></i></a>
 
-                                                             <div class="form-group">
+                                                               <div class="form-group">
                                                                 <!-- Modal Modifier-->
                                                                 <div class="modal fade text-left" id="<?php echo $value[$identifiant].'modifier' ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
                                                                   <div class="modal-dialog" role="document">

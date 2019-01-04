@@ -169,68 +169,116 @@ require 'inc/header.php';?>
  </div>
  <div class="container">
    <div class="row justify-content-center">
-     <div class="media-container-column col-lg-8" data-form-type="formoid">
-       <div data-form-alert="" hidden="">Thanks for filling out the form!</div>
+     <div class="media-container-column col-lg-8">
 
-       <form class="mbr-form" action="traitement_mail.php" method="post" data-form-title="Mobirise Form"><input type="hidden" name="email" data-form-email="true" value="nOtHYh9P9jdX2dhdz/ttxNlx8r0i49a6m3K2mt66KG8x70pUlM2/utFapWaGg7w7tsg/D2aWT7pO6L0AVJAywLWwqtTnERhPG4EernwYlDt14dqzmUWo8i19JOQ3Ec7X">
+      <form class="mbr-form" action="traitement_mail.php" method="post" data-form-title="">
 
-         <div class="row row-sm-offset">
+       <div class="row row-sm-offset">
 
-           <div class="col-md-4 multi-horizontal" data-for="name">
+         <div class="col-md-4 multi-horizontal" data-for="name">
+           <div class="form-group">
+
+             <div class="col-md-4 multi-horizontal" data-for="nom">
+               <div class="form-group">
+                 <label class="form-control-label mbr-fonts-style display-7" for="nom-form1-1h">Nom</label>
+                 <input type="text" class="form-control" name="nom" data-form-field="nom" id="nom-form1-1h" required="" >
+               </div>
+
+               <div class="form-group">
+                <label class="form-control-label mbr-fonts-style display-7" for="prenom-form1-1h">
+                Prenom </label>
+                <input type="tel" class="form-control" name="prenom" data-form-field="prenom" id="prenom-form1-1h" required="">
+              </div>
+
+            </div>
+
+            <div class="col-md-4 multi-horizontal" data-for="email">
              <div class="form-group">
-
-               <div class="col-md-4 multi-horizontal" data-for="name">
-                 <div class="form-group">
-                   <label class="form-control-label mbr-fonts-style display-7" for="name-form1-1h">Nom</label>
-                   <input type="text" class="form-control" name="name" data-form-field="Name" required="" id="name-form1-1h" required="" >
-                 </div>
-
-                 <div class="form-group">
-                   <label class="form-control-label mbr-fonts-style display-7" for="phone-form1-1h">
-                   Prenom </label>
-                   <input type="tel" class="form-control" name="phone" data-form-field="Phone" id="phone-form1-1h" required="">
-                 </div>
-
-               </div>
-
-               <div class="col-md-4 multi-horizontal" data-for="email">
-                 <div class="form-group">
-                   <label class="form-control-label mbr-fonts-style display-7" for="email-form1-1h">Email</label>
-                   <input type="email" class="form-control" name="email" data-form-field="Email" required="" id="email-form1-1h" required="">
-                 </div>
-               </div>
-
-               <div class="col-md-4 multi-horizontal" data-for="phone">
-                 <div class="form-group">
-                   <label class="form-control-label mbr-fonts-style display-7" for="phone-form1-1h">Phone</label>
-                   <input type="tel" class="form-control" name="phone" data-form-field="Phone" id="phone-form1-1h" required="">
-                 </div>
-               </div>
-
-               <div class="col-md-4 multi-horizontal" data-for="phone">
-                 <div class="form-group">
-                   <label class="form-control-label mbr-fonts-style display-7" for="phone-form1-1h">
-                   Objet </label>
-                   <input type="tel" class="form-control" name="phone" data-form-field="Phone" id="phone-form1-1h" required="">
-                 </div>
-               </div>
-
-               <div class="form-group" data-for="message">
-                 <label class="form-control-label mbr-fonts-style display-7" for="message-form1-1h">Message</label>
-                 <textarea type="text" class="form-control" name="message" rows="7" data-form-field="Message" id="message-form1-1h" required=""></textarea>
-               </div>
-
+               <label class="form-control-label mbr-fonts-style display-7" for="email-form1-1h">Email</label>
+               <input type="email" class="form-control" name="email" data-form-field="Email" id="email-form1-1h" required="">
              </div>
-
-             <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary btn-form display-4"><span class="mbri-paper-plane mbr-iconfont mbr-iconfont-btn"></span>Envoyer</button></span>
-
-             <span class="gdpr-block "><label><input type="checkbox" name="gdpr" id="gdpr-form1-b" required="">By continiung you agree to our <a href="terms.html">Terms of Service</a> and <a href="policy.html">Privacy Policy</a>.</label></span></form>
-
            </div>
-         </div>
+
+           <div class="col-md-4 multi-horizontal" data-for="telephone">
+             <div class="form-group">
+              <label class="form-control-label mbr-fonts-style display-7" for="telephone-form1-1h">Telephone</label>
+              <input type="tel" class="form-control" name="telephone" data-form-field="telephone" id="telephone-form1-1h" required="">
+            </div>
+          </div>
+
+          <div class="col-md-4 multi-horizontal" data-for="objet">
+           <div class="form-group">
+            <label class="form-control-label mbr-fonts-style display-7" for="objet-form1-1h">
+            Objet </label>
+            <input type="tel" class="form-control" name="objet" data-form-field="objet" id="objet-form1-1h" required="">
+          </div>
+        </div>
+
+        <div class="form-group" data-for="message">
+         <label class="form-control-label mbr-fonts-style display-7" for="message-form1-1h">Message</label>
+         <textarea type="text" class="form-control" name="message" rows="7" data-form-field="Message" id="message-form1-1h" required=""></textarea>
        </div>
-     </section>
 
-     <?php require 'inc/footer.php'; ?>
+     </div>
+
+     <span class="input-group-btn"><button href="" type="submit" class="btn btn-primary btn-form display-4"><span class="mbri-paper-plane mbr-iconfont mbr-iconfont-btn"></span>Envoyer</button></span>
+
+     <!--<span class="gdpr-block "><label><input type="checkbox" name="gdpr" id="gdpr-form1-b" required="">By continiung you agree to our <a href="terms.html">Terms of Service</a> and <a href="policy.html">Privacy Policy</a>.</label></span>-->
+   </form>
+
+ </div>
+</div>
+</div>
+</section>
+
+<?php require 'inc/footer.php'; ?>
+
+<script>
 
 
+        /**
+        *
+        */
+        function contacter()
+        {
+          //Contacter
+          $.ajax({
+            method:'POST',
+            url:'controlleur/contacter.php',
+            data: $("#contacter").serialize(),
+            dataType:'json'
+          })
+
+         //Redirection
+         .done(function(data)
+         {
+          if(data=="redirection"){
+            $(location).attr("href", "/glazik");
+          }if(data['texte']!=""){
+            $("#info-inscription").empty();
+            $("#form1-1h").empty();
+            $("#good").html(data['message']);
+            $("#message-inscription").html(data['texte']);
+          }else{
+            $("#info-inscription").empty();
+            $("#good").html(data['message']);
+            $("#message-inscription").html(data['texte']);
+          }
+
+        })
+
+         .fail(function( jqXHR, textStatus ) 
+         {
+          alert("Le serveur n'a pas pu charger les données veuillez réessayer plus tard.");
+        });
+
+       }
+
+
+       $(document).ready(function() {
+
+
+       });
+
+
+     </script>

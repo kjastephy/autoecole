@@ -30,8 +30,11 @@
   <link rel="stylesheet" type="text/css" href="assetsDashboard/assets/fonts/meteocons/style.min.css">
 
   <link rel="stylesheet" type="text/css" href="assetsDashboard/assets/vendors/css/charts/morris.css">
+
   
-  <link rel="stylesheet" type="text/css" href="assetsDashboard/assets/vendors/css/forms/selects/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="assetsDashboard/assets/vendors/css/forms/icheck/icheck.css">
+  <link rel="stylesheet" type="text/css" href="assetsDashboard/assets/vendors/css/forms/icheck/custom.css">
+
 
   <link rel="stylesheet" type="text/css" href="assetsDashboard/assets/css/pages/email-application.css">
 
