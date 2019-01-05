@@ -28,20 +28,13 @@
 					Contacts
 				</h5>
 				<p class="mbr-text">
-					Email: support@mobirise.com
-					<br>Phone: +1 (0) 000 0000 001
-					<br>Fax: +1 (0) 000 0000 002
+					Email: support@glazikautoecole.com
+					<br>Phone: +33 (0) 000 0000 001
+					<br>Fax: +33 (0) 000 0000 002
 				</p>
 			</div>
 			<div class="col-12 col-md-3 mbr-fonts-style display-7">
-				<h5 class="pb-3">
-					Links
-				</h5>
-				<p class="mbr-text">
-					<a class="text-primary" href="">Website builder</a>
-					<br><a class="text-primary" href="">Download for Windows</a>
-					<br><a class="text-primary" href="">Download for Mac</a>
-				</p>
+				
 			</div>
 		</div>
 		<div class="footer-lower">

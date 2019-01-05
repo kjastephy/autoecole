@@ -160,7 +160,7 @@ require 'inc/header.php';?>
        <h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">
          PRENEZ CONTACT AVEC NOUS
        </h2>
-       <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">
+       <h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5" id="demandeinfo">
          N'hésitez pas à venir vers nous, si vous avez des questions. <br>
          La <a href="faq.php"> FAQ </a> peut aussi vous être utile.
        </h3>
@@ -171,7 +171,7 @@ require 'inc/header.php';?>
    <div class="row justify-content-center">
      <div class="media-container-column col-lg-8">
 
-      <form class="mbr-form" action="traitement_mail.php" method="post" data-form-title="">
+      <form class="mbr-form" action="JavaScript:contacter()" id="contacter">
 
        <div class="row row-sm-offset">
 
@@ -252,17 +252,11 @@ require 'inc/header.php';?>
          //Redirection
          .done(function(data)
          {
-          if(data=="redirection"){
+          if(data['message']=="bad"){
             $(location).attr("href", "/glazik");
-          }if(data['texte']!=""){
-            $("#info-inscription").empty();
-            $("#form1-1h").empty();
-            $("#good").html(data['message']);
-            $("#message-inscription").html(data['texte']);
-          }else{
-            $("#info-inscription").empty();
-            $("#good").html(data['message']);
-            $("#message-inscription").html(data['texte']);
+          }else if(data['message']=="good"){
+            $("#contacter").empty();
+            $("#demandeinfo").html(data['texte']);
           }
 
         })

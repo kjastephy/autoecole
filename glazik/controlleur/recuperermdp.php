@@ -25,19 +25,25 @@
             }
             else
             {
+                //sendMail($_POST['email'],"Recupération mot de passe","Bonjour {$_POST['nom']}, <br> Vous avez effectué une demande d'inscription sur notre site. Nous traiterons votre demande dans un bref délais.<br>Cordialement,<br><br><br>NB: Merci de ne pas repondre à ce mail","");
+
                 $data = array(
                     'texte'=> "Nous vous contacterons par mail, pour vous donnez les informations sur votre compte.",
                     'message'=> "Demande Envoyée"
                 );
 
                 echo json_encode($data);
-
-                //envoie email
             }
 
         }
     }
     else
     {
-        header('location: ../index.php');
+        $data = array(
+            'texte'=> "",
+            'message'=> ""
+        );
+
+        echo json_encode($data);
+        //header('location: ../index.php');
     }

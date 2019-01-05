@@ -69,8 +69,18 @@
         ***********Fonction***********
         ***************************************/
 
-        function msg() {
-          $("#dropdrop").click();
+        function msg(response) {
+          if(response==""){
+            $("#dropdrop").click();
+            $("#inputName1").empty();
+            $("#inputEmail1").empty();
+            $("#inputMessage1").empty();
+          }else{
+            $("#dropdrop").click();
+            $("#inputName1").val($("#objetMAIL").html());
+            $("#inputEmail1").val($("#emailMAIL").html());
+            $("#inputMessage1").val("");
+          }
         }
 
         /**
@@ -103,7 +113,69 @@
         *
         * 
         */
-        function showmail(objet,nom,email,image,contenu)
+        function emaildelete()
+        {
+          $.ajax({
+            method:'POST',
+            url:'controlleur/emaildelete.php',
+            data: $('#emaildelete').serialize(),
+            dataType:'json'
+          })
+
+             //Redirection du partenaire vers Orange
+             .done(function(data)
+             {
+              if (data=="good") {
+
+                $("#email").click();
+              }else{
+                $(location).attr("href", "/glazik/dashboard");
+              }
+
+            })
+
+             .fail(function( jqXHR, textStatus ) 
+             {
+              alert("Le serveur n'a pas pu charger les données veuillez réessayer plus tard.");
+            });
+           }
+
+        /**
+        *
+        * 
+        */
+        function reponsemail()
+        {
+          $.ajax({
+            method:'POST',
+            url:'controlleur/reponsemail.php',
+            data: $('#reponsemail').serialize(),
+            dataType:'json'
+          })
+
+             //Redirection du partenaire vers Orange
+             .done(function(data)
+             {
+              if (data=="good") {
+                $("#email").click();
+              }else{
+                $(location).attr("href", "/glazik/dashboard");
+              }
+
+            })
+
+             .fail(function( jqXHR, textStatus ) 
+             {
+              alert("Le serveur n'a pas pu charger les données veuillez réessayer plus tard.");
+            });
+           }
+
+
+        /**
+        *
+        * 
+        */
+        function showmail(objet,nom,email,image,contenu,form,lu,id)
         {
           $("#objetMAIL").empty();
           $("#nomMAIL").empty();
@@ -116,7 +188,29 @@
           $("#emailMAIL").html(email);
           $("#imageMAIL").html(image);
           $("#contenuMAIL").html(contenu);
-        }
+
+          $("#idEmailDelete").val(id);
+
+          if(lu=="Non lu") {
+            //Initialisation 
+            $.ajax({
+              method:'POST',
+              url:'controlleur/emailchange.php',
+              data: $(form).serialize(),
+            })
+
+             //Redirection du partenaire vers Orange
+             .done(function()
+             {
+
+             })
+
+             .fail(function( jqXHR, textStatus ) 
+             {
+              alert("Le serveur n'a pas pu charger les données veuillez réessayer plus tard.");
+            });
+           }
+         }
 
         /**
         *
@@ -143,7 +237,6 @@
         */
         function operation(form,action,modal)
         {
-          alert("ok");
           //Initialisation de la session OMPAY 
           $.ajax({
             method:'POST',
@@ -155,7 +248,6 @@
          //Redirection du partenaire vers Orange
          .done(function(data)
          {
-          alert("ok4");
           $(data['id']).click(); //Recharge la page
           eval(data['notificaton']);//notificaton
 

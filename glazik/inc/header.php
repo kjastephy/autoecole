@@ -1,6 +1,6 @@
-  <?php  session_start(); 
-  $error = isset($_GET['error']) ? $_GET['error'] : '';
-  ?>
+    <?php  session_start(); 
+    $error = isset($_GET['error']) ? $_GET['error'] : '';
+    ?>
 
 
   <!--<?php setcookie($_POST['login'], time() + 365*24*3600, null, null, false, true);
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="assets/theme/css/style.css">
     <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="" async defer></script>
 
 
     <section class="menu cid-ra1C1pRxzb" once="menu" id="menu2-19">
@@ -87,7 +87,14 @@
 
             <li class="nav-item">
               <a class="nav-link link text-black display-4" href="faq.php#content5-13" aria-expanded="false">FAQ</a>
+            </li> 
+            
+            <?php
+            if (isset($_SESSION['logged']) || $_SESSION['logged']) { // Quand il y'a session (Compte Utilisateur / Déconnexion)
+            ?><li class="nav-item">
+              <a class="nav-link link text-black display-4" href="myaccount_clients.php" aria-expanded="false">Envoyer Document</a>
             </li>
+            <?php } ?>
 
             <!-- Inserer element css pour centrer -->
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

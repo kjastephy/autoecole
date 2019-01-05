@@ -38,19 +38,7 @@ function sendMail($email,$object,$contenu,$type){
 
 	mail($email, $object, $message, $header);
 
-	if($type=="reçu"){
-
-		$req=$bdd->prepare("INSERT INTO email (type,email,nom,prenom,objet,contenu)
-	) VALUES (:type,:email,:nom,:prenom,:objet,:contenu)");
-		$req->execute(array(
-			'email'=>$_POST['email'],
-			'nom'=>$_POST['nom'],
-			'prenom'=>$_POST['prenom'],
-			'objet'=>$_POST['objet'],
-			'contenu'=>$message
-		));
-	}
-
+	return $message;
 }
 
 

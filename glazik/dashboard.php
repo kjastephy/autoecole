@@ -50,15 +50,15 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
 
                   <li class="col-md-8">
                     <h6 class="dropdown-menu-header text-uppercase mb-1"><i class="fa fa-envelope-o"></i> Contactez nous</h6>
-                    <form class="form form-horizontal" method="post" action="WelcomeController@postInfo" novalidate>
+                    <form class="form form-horizontal" id="reponsemail" action="JavaScript:reponsemail()" novalidate>
                       <input type="text" hidden="true" id="option" class="form-control" name="sendMaid" value="sendMaid">
                       <div class="form-body">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label" for="inputName1">Nom</label>
+                          <label class="col-sm-3 col-form-label" for="inputName1">Objet</label>
                           <div class="col-sm-9">
                             <div class="position-relative has-icon-left">
-                              <input class="form-control" type="text" id="inputName1" placeholder="<?php echo strtoupper($_SESSION['nom'].'.'.$_SESSION['prenom'])?>" name="nom" required>
-                              <div class="form-control-position pl-1"><i class="fa fa-user-o"></i></div>
+                              <input class="form-control" type="text" id="inputName1" placeholder="Demande Inscription" name="objet" required>
+                              <div class="form-control-position pl-1"><i class="fa fa-paper-plane-o"></i></div>
                             </div>
                           </div>
                         </div>
@@ -143,14 +143,10 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
         <li class=" navigation-header"><span>Dashboard</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="General"></i>
         </li>
 
-        <!--Contenu-->
-        <li class=" navigation-header"><span>MESSAGERIE</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="General"></i>
-        </li>
-
         <li class="">
           <a class="menu-title" href="#" id="email">
             <i class="ft-monitor"></i>
-            <span class="menu-title" data-i18n="">Email</span>
+            <span class="menu-title" data-i18n="">MESSAGERIE</span>
           </a>
 
         </li>
