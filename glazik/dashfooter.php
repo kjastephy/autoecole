@@ -320,7 +320,7 @@
         ***************************************/
 
         //permisvoiture
-        $('#permisvoiture').on('click', function ( e ) {
+        $('#permis_voiture').on('click', function ( e ) {
           e.preventDefault();
 
           redirigerPage('permis_voiture','permis',"permis_voiture",'ads','',"ID,Icon,Titre,Texte,Etat","");
@@ -330,7 +330,7 @@
         });
 
         //permismoto
-        $('#permismoto').on('click', function ( e ) {
+        $('#permis_moto').on('click', function ( e ) {
           e.preventDefault();
 
           redirigerPage('permis_moto','permis',"permis_moto",'ads','',"ID,Icon,Titre,Texte,Etat","");
@@ -340,7 +340,7 @@
         });
 
         //permisbateau
-        $('#permisbateau').on('click', function ( e ) {
+        $('#permis_bateau').on('click', function ( e ) {
           e.preventDefault();
 
           redirigerPage('permis_bateau','permis',"permis_bateau",'ads','',"ID,Icon,Titre,Texte,Etat","");
@@ -358,7 +358,7 @@
         $('#client').on('click', function ( e ) {
           e.preventDefault();
 
-          redirigerPage('clients','client',"client",'ads','',"ID,Civilite,Nom,Prenom,Date Naissance,Login,Mot de Passe,Email,Tel 1,Tel 2,Tel3,Date inscription,Date Sortie,Code,Type Permis,Etat","clients1");
+          redirigerPage('clients','client',"client",'ads','',"ID,Civilite,Nom,Prenom,Date Naissance,Login,Mot de Passe,Email,Tel 1,Tel 2,Tel3,Date inscription,Date Sortie,Code,Type Permis,Document,Etat","clients1");
 
           //chargerPage('#content','contenu.php','clients','clients',['ID','Civilite','Nom','Prenom','Date Naissance','Login','Mdp','email','Tel 1','Tel 2','Tel3','Date inscription','Date Sortie','Code','Type Permis','Etat']);
 

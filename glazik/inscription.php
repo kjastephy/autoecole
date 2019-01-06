@@ -117,8 +117,26 @@ require 'inc/header.php';
                             </div>
                         </div>
 
-                    </div>
 
+                        <div class="col-md-4 multi-horizontal" data-for="permis">
+                            <div class="form-group">
+
+                                <label class="form-control-label mbr-fonts-style display-7" for="permis-form1-1h">
+                                Permis </label>
+
+                                <select class="form-control" name="permis" id="permis" size="1" required="">
+
+                                    <option value="Voiture">Voiture</option>
+                                    <option value="Moto">Moto</option>
+                                    <option value="Bateau">Bateau</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
 
                     <span class="input-group-btn"><button id="inscription" type="submit" class="btn btn-primary btn-form display-4"><span class="mbri-paper-plane mbr-iconfont mbr-iconfont-btn"></span>Demande d'inscription</button></span>
 

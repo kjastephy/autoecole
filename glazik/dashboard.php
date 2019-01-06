@@ -176,20 +176,20 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
         </li>
 
         <li class="">
-          <a class="menu-title" href="#" id="permisvoiture">
+          <a class="menu-title" href="#" id="permis_voiture">
             <i class="ft-monitor"></i>
             <span class="menu-title" data-i18n="">Permis Voiture</span>
           </a>
 
         </li>
         <li>
-          <a class="menu-item" href="#" id="permismoto">
+          <a class="menu-item" href="#" id="permis_moto">
             <i class="ft-box"></i>
             <span class="menu-title" data-i18n="">Permis Moto</span>
           </a>
         </li>
         <li>
-          <a class="menu-item" href="#" id="permisbateau">
+          <a class="menu-item" href="#" id="permis_bateau">
             <i class="ft-box"></i>
             <span class="menu-title" data-i18n="">Permis Bateau</span>
           </a>
@@ -275,13 +275,11 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
         <div id="content">
           <?php include('contenu.php'); ?>
         </div>
-
       </div>
     </div>
-  </div>
 
-  <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-  <?php 
-}
-include_once("dashfooter.php");?>
+    <?php 
+  }
+  include_once("dashfooter.php");?>

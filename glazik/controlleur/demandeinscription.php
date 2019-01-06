@@ -6,7 +6,7 @@
     {        
 
         //ajout
-        if (isset($_POST['add']) && isset($_POST['civilite']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['dateNaissance']) && isset($_POST['tel1'])) 
+        if (isset($_POST['add']) && isset($_POST['civilite']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['dateNaissance']) && isset($_POST['tel1']) && isset($_POST['permis'])) 
         {
             $req=$bdd->prepare("SELECT email FROM clients WHERE email=:email");
             $req->execute(array(
@@ -18,13 +18,14 @@
             if($donnees==null)
             {
 
-                $req=$bdd->prepare("INSERT INTO clients (civilite,nom,prenom,email,date_naissance,tel1) VALUES (:civilite,:nom,:prenom,:email,:dateNaissance,:tel1)");
+                $req=$bdd->prepare("INSERT INTO clients (civilite,nom,prenom,email,date_naissance,tel1,id_CatPermis) VALUES (:civilite,:nom,:prenom,:email,:dateNaissance,:tel1,:permis)");
                 $req->execute(array(
                  'civilite'=>$_POST['civilite'],
                  'nom'=>$_POST['nom'],
                  'prenom'=>$_POST['prenom'],
                  'email'=>$_POST['email'],
                  'dateNaissance'=>$_POST['dateNaissance'],
+                 'permis'=>$_POST['permis'],
                  'tel1'=>$_POST['tel1']
              ));
 
