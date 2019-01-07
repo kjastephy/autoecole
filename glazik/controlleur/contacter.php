@@ -2,7 +2,7 @@
 
     require_once '../inc/db.php'; // Appel fichier connexion bdd
 
-    if(true)
+    if($_SESSION['type']=="admin")
     {        
 
         //ajout
@@ -13,7 +13,7 @@
 
 
             $req=$bdd->prepare("INSERT INTO email (lu,email,nom,prenom,objet,contenu)
-               VALUES (:lu,:email,:nom,:prenom,:objet,:contenu)");
+             VALUES (:lu,:email,:nom,:prenom,:objet,:contenu)");
             $req->execute(array(
                 'lu'=>'Non lu',
                 'email'=>$_POST['email'],

@@ -86,6 +86,7 @@
 <script src="assets/parallax/jarallax.min.js"></script>
 <script src="assets/theme/js/script.js"></script>
 <script src="assets/formoid/formoid.min.js"></script>
+
 <input name="animation" type="hidden">
 <input name="cookieData" type="hidden" data-cookie-text="We use cookies to give you the best experience. Read our <a href='privacy.html'>cookie policy</a>.">
 </body>

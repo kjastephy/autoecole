@@ -1,7 +1,9 @@
 <?php 
-//session_start();
+/*Cette page correspond à la page principale de notre dashboard, elle varie en fonction des clicks sur le bouton */;
 
 if(isset($_POST['table']) && isset($_POST['titre']) && isset($_POST['ADS']) && isset($_POST['title']) && isset($_POST['body']) && isset($_POST['head'])){
+
+    /*Tables des requête utilisée lorsque $_POST['query'] est non videe*/
 
     $query= array(
         'clients' => "SELECT id_Clients, civilite, nom, prenom, date_naissance, email, tel1, tel2, tel_Parents, date_Inscription, date_Sortie, possede_Code, id_CatPermis, etat FROM {$_POST['table']} WHERE etat='demande'" ,
@@ -18,9 +20,9 @@ $titre=$_POST['titre']; //Title de la page
 
 $ADS=$_POST['ADS']; // $ADS va permettre de vérifier si nous devons mettre du contenu, donc ajout, modification et suppression de données
 
-$title=$_POST['title'];
+$title=$_POST['title']; //Title , correspond au nom des tables dans la base de données
 
-$body=$_POST['body'];
+$body=$_POST['body']; //Contenu explicatif des datatables
 
 if (!(empty($data)))
 {
@@ -85,7 +87,9 @@ if (!(empty($data)))
 
                                                             <input type="text" hidden="true" id="option" class="form-control" name="add" value="add" >
 
-                                                            <?php include("formulaire/{$titre}-add.php"); ?>
+                                                            <?php 
+                                                            /*Inclusion du formulaire*/
+                                                            include("formulaire/{$titre}-add.php"); ?>
 
                                                             <div class="form-actions right">
                                                                 <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
@@ -111,6 +115,7 @@ if (!(empty($data)))
                         <thead>
                             <tr>
                                 <?php 
+                                //Affichage des entête;
                                 $i=0;
                                 foreach ($head as $key => $value){ 
                                     if ($i!=0){ ?>
@@ -122,13 +127,21 @@ if (!(empty($data)))
                                 }
                             }
                             ?>
-                            <th>ACTION</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($content as $key => $value){
 
-                                        //$value=$value->toArray(); ?>
+                            <?php 
+                            //Affichage consultation documents;
+                            if ($_POST['query']=="clients1") { ?>
+                            <th>Documents</th>
+                            <?php
+                        } ?>
+
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($content as $key => $value){
+
+                                        //Affichage des données; ?>
 
                                         <tr>
                                             <?php $i=0;$c=count($value);
@@ -148,294 +161,339 @@ if (!(empty($data)))
 
                                                     if ($i==$c)
                                                     {
-                                                        ?>
-                                                        <td>
-                                                            <!-- Button trigger modal modifier -->
-                                                            <a href="#" class="btn btn-float btn-round btn-secondary" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'modifier' ?>"><i class="fa fa-pencil-square-o
 
-                                                               f044"></i></a>
+                                                        /*Consultation des documents*/
+                                                        if ($_POST['query']=="clients1") { ?>
+                                                        <td><a href="#" class="" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'doc' ?>"><i class=""></i>Consulter</a>
 
-                                                               <!-- Button trigger modal supprimer-->
-                                                               <a href="#" class="btn btn-float btn-round btn-danger" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'supprimer' ?>"><i class="fa fa-trash"></i></a>
-
-                                                               <div class="form-group">
+                                                            <div class="form-group">
                                                                 <!-- Modal Modifier-->
-                                                                <div class="modal fade text-left" id="<?php echo $value[$identifiant].'modifier' ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
+                                                                <div class="modal fade text-left" id="<?php echo $value[$identifiant].'doc' ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
                                                                   <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                       <div class="modal-header bg-secondary white">
-                                                                          <h4 class="modal-title" id="myModalLabel8"><?php echo 'Modifier '.$titre ?></h4>
-                                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                              <span aria-hidden="true">×</span>
-                                                                          </button>
-                                                                      </div>
-                                                                      <div class="modal-body">
-                                                                        <section class="input-validation" id="form-control-repeater">
-                                                                            <div class="card">
-                                                                                <div class="card-content collapse show">
-                                                                                    <div class="card-body">
+                                                                        <h4 class="modal-title" id="myModalLabel8"><?php echo 'Documents '.$titre ?></h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                          <span aria-hidden="true">×</span>
+                                                                      </button>
+                                                                  </div>
+                                                                  <div class="modal-body">
+                                                                    <section class="input-validation" id="form-control-repeater">
+                                                                        <div class="card">
+                                                                            <div class="card-content collapse show">
+                                                                                <div class="card-body">
 
-                                                                                        <?php $action_form="JavaScript:operation('#form{$value[$identifiant]}modifier','controlleur/{$titre}.php','#{$value[$identifiant]}modifier');"; ?>
+                                                                                    <?php include("formulaire/document.php"); ?>
 
-                                                                                        <form id="form<?php echo $value[$identifiant];?>modifier" class="form" method="post" action="<?php echo $action_form;?>">
-
-                                                                                            <!--contenu du formulaire-->
-                                                                                            <input type="text" hidden="true" id="option" class="form-control" name="update" value="update" >
-
-                                                                                            <?php include("formulaire/{$titre}-update.php"); ?>
-
-                                                                                            <div class="form-actions right">
-                                                                                                <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
-                                                                                                    <i class="ft-x"></i> Fermer
-                                                                                                </button>
-                                                                                                <button type="submit" class="btn btn-secondary">
-                                                                                                    <i class="fa fa-check-square-o"></i> Modifier
-                                                                                                </button>
-                                                                                            </div>
-
-                                                                                        </form>
-                                                                                    </div>
+                                                                                    <!--<div class="form-actions right">
+                                                                                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
+                                                                                            <i class="ft-x"></i> Fermer
+                                                                                        </button>
+                                                                                    </div>-->
                                                                                 </div>
                                                                             </div>
-                                                                        </section>
-                                                                    </div>
+                                                                        </div>
+                                                                    </section>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group">
+                                            </td>
 
-                                                        <!-- Modal Supprimer-->
-                                                        <div class="modal fade text-left" id="<?php echo $value[$identifiant].'supprimer' ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
-                                                          <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                              <div class="modal-header bg-danger white">
-                                                                  <h4 class="modal-title" id="myModalLabel8"><?php echo 'Supprimer '.$titre ?></h4>
-                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                      <span aria-hidden="true">×</span>
-                                                                  </button>
-                                                              </div>
-                                                              <div class="modal-body">
-                                                                <section class="input-validation" id="form-control-repeater">
-                                                                    <div class="card">
-                                                                        <div class="card-content collapse show">
-                                                                            <div class="card-body">
+                                            <?php } ?>
+                                            <td>
+                                                <!-- Button trigger modal modifier -->
+                                                <a href="#" class="btn btn-float btn-round btn-secondary" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'modifier' ?>"><i class="fa fa-pencil-square-o
 
-                                                                                <?php $action_form="JavaScript:operation('#form{$value[$identifiant]}supprimer','controlleur/{$titre}.php','#{$value[$identifiant]}supprimer');"; ?>
+                                                   f044"></i></a>
 
-                                                                                <form id="form<?php echo $value[$identifiant];?>supprimer" class="form" method="post" action="<?php echo $action_form;?>">
+                                                   <!-- Button trigger modal supprimer-->
+                                                   <a href="#" class="btn btn-float btn-round btn-danger" data-toggle="modal" data-backdrop="false" data-target="#<?php echo $value[$identifiant].'supprimer' ?>"><i class="fa fa-trash"></i></a>
 
-                                                                                    <input type="text" hidden="true" id="option" class="form-control" name="delete" value="delete">
+                                                   <div class="form-group">
+                                                    <!-- Modal Modifier-->
+                                                    <div class="modal fade text-left" id="<?php echo $value[$identifiant].'modifier' ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
+                                                      <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                          <div class="modal-header bg-secondary white">
+                                                              <h4 class="modal-title" id="myModalLabel8"><?php echo 'Modifier '.$titre ?></h4>
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                  <span aria-hidden="true">×</span>
+                                                              </button>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                            <section class="input-validation" id="form-control-repeater">
+                                                                <div class="card">
+                                                                    <div class="card-content collapse show">
+                                                                        <div class="card-body">
 
-                                                                                    <!--contenu du formulaire-->
-                                                                                    <?php include("formulaire/{$titre}-update.php"); ?>
+                                                                            <?php $action_form="JavaScript:operation('#form{$value[$identifiant]}modifier','controlleur/{$titre}.php','#{$value[$identifiant]}modifier');"; ?>
 
-                                                                                    <div class="form-actions right">
-                                                                                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
-                                                                                            <i class="ft-x"></i> Fermer
-                                                                                        </button>
-                                                                                        <button type="submit" class="btn btn-danger">
-                                                                                            <i class="fa fa-check-square-o"></i> Supprimer
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </form>
-                                                                            </div>
+                                                                            <form id="form<?php echo $value[$identifiant];?>modifier" class="form" method="post" action="<?php echo $action_form;?>">
+
+                                                                                <!--contenu du formulaire-->
+                                                                                <input type="text" hidden="true" id="option" class="form-control" name="update" value="update" >
+
+                                                                                <?php include("formulaire/{$titre}-update.php"); ?>
+
+                                                                                <div class="form-actions right">
+                                                                                    <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
+                                                                                        <i class="ft-x"></i> Fermer
+                                                                                    </button>
+                                                                                    <button type="submit" class="btn btn-secondary">
+                                                                                        <i class="fa fa-check-square-o"></i> Modifier
+                                                                                    </button>
+                                                                                </div>
+
+                                                                            </form>
                                                                         </div>
                                                                     </div>
-                                                                </section>
-                                                            </div>
+                                                                </div>
+                                                            </section>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <?php } 
-                                    }
-                                    else
-                                    { 
-                                        $i+=1; 
-                                        $identifiant=$key1;
-                                    } 
-                                } ?>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                                        </div>
 
-                    <?php }elseif(!empty($head) && !empty($content)){ ?>
+                                        <div class="form-group">
 
-                    <table class="table display nowrap table-striped table-bordered scroll-horizontal">
-                        <thead>
-                            <tr>
-                                <?php 
-                                $i=0;
-                                foreach ($head as $key => $value)
-                                {
-                                    if ($i!=0)
-                                        {?>
-                                            <th><?php echo strtoupper($value) ?></th>
-                                            <?php 
-                                        }
-                                        else
-                                        {
-                                            $i=1; 
-                                        }
-                                    }
+                                            <!-- Modal Supprimer-->
+                                            <div class="modal fade text-left" id="<?php echo $value[$identifiant].'supprimer' ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header bg-danger white">
+                                                      <h4 class="modal-title" id="myModalLabel8"><?php echo 'Supprimer '.$titre ?></h4>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                          <span aria-hidden="true">×</span>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    <section class="input-validation" id="form-control-repeater">
+                                                        <div class="card">
+                                                            <div class="card-content collapse show">
+                                                                <div class="card-body">
 
-                                    if (!empty($deleteOrUpdate)){?>
-                                    <th>ACTION</th>
-                                    <?php}?>
-                                </tr>
-                            </thead>
+                                                                    <?php $action_form="JavaScript:operation('#form{$value[$identifiant]}supprimer','controlleur/{$titre}.php','#{$value[$identifiant]}supprimer');"; ?>
 
-                            <tbody>
+                                                                    <form id="form<?php echo $value[$identifiant];?>supprimer" class="form" method="post" action="<?php echo $action_form;?>">
 
-                                <?php foreach ($content as $key => $value)
-                                {
+                                                                        <input type="text" hidden="true" id="option" class="form-control" name="delete" value="delete">
 
-                                    $value=$value->toArray(); ?>
+                                                                        <!--contenu du formulaire-->
+                                                                        <?php 
+                                                                        /*Inclusion du formulaire*/
+                                                                        include("formulaire/{$titre}-update.php"); ?>
 
-                                    <tr>
-                                        <?php 
-                                        $i=0;
-                                        foreach ($value as $key1 => $value1)
-                                        {
-                                            if ($i!=0)
-                                            {
-                                                if ($value[$key1]=="actualite.politique")
-                                                    {?>
-                                                        <td>Actualités politiques</td>
-                                                        <?php 
-                                                    }
-                                                    else
-                                                        {?>
-                                                            <td><?php echo $value[$key1] ?></td>
-                                                            <?php 
-                                                        }
-                                                    }
-                                                    else{
-
-
-                                                        $i=1; 
-                                                        $identifiant=$key1;
-                                                    }
-                                                }
-
-                                                if (!empty($deleteOrUpdate))
-                                                    {?>
-                                                        <td>
-                                                            <form action="{{action('SouscriptionController@postInfo')?>" method="post">
-
-                                                                <input type="hidden" name="subscription_id" value="<?php echo $value[$identifiant] ?>">
-                                                                <!-- Button trigger  modifier -->
-                                                                <button type="submit" class="btn btn-float btn-round btn-success" ><i class="fa fa-pencil-square-o
-                                                                    f044"></i></button>
-                                                                </form>
-                                                            </td>
-                                                            <?php
-                                                        }
-
-                                                    }
-                                                    ?>
-                                                </tr>
-                                                <?php 
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-
-                                    <?php
-                                }
-                                else{
-                                    if (!empty($ADS)){?>
-                                    <!-- $ADS va permettre de vérifier si nous devons mettre du contenu, donc ajout, modification et suppression de données-->
-                                    <div class="form-group">
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-outline-secondary block btn-lg" data-toggle="modal" data-backdrop="false" data-target="#ajouter">
-                                            AJOUTER UN CONTENU
-                                        </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade text-left" id="ajouter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                              <div class="modal-header bg-secondary white">
-                                                  <h4 class="modal-title" id="myModalLabel8"><?php echo 'Ajouter '.$titre ?></h4>
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                      <span aria-hidden="true">×</span>
-                                                  </button>
-                                              </div>
-
-                                              <div class="modal-body">
-                                                <section class="input-validation" id="form-control-repeater">
-                                                    <div class="card">
-                                                        <div class="card-content collapse show">
-                                                            <div class="card-body">
-                                                                <?php $action_form="JavaScript:operation('#formajout','controlleur/{$titre}.php','#ajouter');"; ?>
-                                                                <form id="formajout" class="form" method="post" action="<?php echo $action_form;?>">
-                                                                    <!--contenu du formulaire-->
-
-
-                                                                    <input type="text" hidden="true" id="option" class="form-control" name="add" value="add" >
-
-                                                                    <?php include("formulaire/{$titre}-add.php"); ?>
-
-
-                                                                    <div class="form-actions right">
-                                                                        <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
-                                                                            <i class="ft-x"></i> Fermer
-                                                                        </button>
-                                                                        <button type="submit" class="btn btn-secondary">
-                                                                            <i class="fa fa-check-square-o"></i> Ajouter
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
+                                                                        <div class="form-actions right">
+                                                                            <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
+                                                                                <i class="ft-x"></i> Fermer
+                                                                            </button>
+                                                                            <button type="submit" class="btn btn-danger">
+                                                                                <i class="fa fa-check-square-o"></i> Supprimer
+                                                                            </button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </section>
+                                                    </section>
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <?php 
-                        }?>
+                            </td>
+                            <?php } 
+                        }
+                        else
+                        { 
+                            $i+=1; 
+                            $identifiant=$key1;
+                        } 
+                    } ?>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
 
-                        <table class="table display nowrap table-striped table-bordered scroll-horizontal">
-                            <thead>
-                                <tr>
-                                    <!--<th></th>-->
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                </tr>
+        <?php } elseif(!empty($head) && !empty($content)){ ?>
+
+        <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+            <thead>
+                <tr>
+                    <?php 
+                    $i=0;
+                    foreach ($head as $key => $value)
+                    {
+                        if ($i!=0)
+                            {?>
+                                <th><?php echo strtoupper($value) ?></th>
+                                <?php 
+                            }
+                            else
+                            {
+                                $i=1; 
+                            }
+                        }
+
+                        if (!empty($deleteOrUpdate)){?>
+                        <th>ACTION</th>
+                        <?php}?>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <?php foreach ($content as $key => $value)
+                    {
+
+                        $value=$value->toArray(); ?>
+
+                        <tr>
+                            <?php 
+                            $i=0;
+                            foreach ($value as $key1 => $value1)
+                            {
+                                if ($i!=0)
+                                {
+                                    if ($value[$key1]=="actualite.politique")
+                                        {?>
+                                            <td>Actualités politiques</td>
+                                            <?php 
+                                        }
+                                        else
+                                            {?>
+                                                <td><?php echo $value[$key1] ?></td>
+                                                <?php 
+                                            }
+                                        }
+                                        else{
+
+
+                                            $i=1; 
+                                            $identifiant=$key1;
+                                        }
+                                    }
+
+                                    if (!empty($deleteOrUpdate))
+                                        {?>
+                                            <td>
+                                                <form action="{{action('SouscriptionController@postInfo')?>" method="post">
+
+                                                    <input type="hidden" name="subscription_id" value="<?php echo $value[$identifiant] ?>">
+                                                    <!-- Button trigger  modifier -->
+                                                    <button type="submit" class="btn btn-float btn-round btn-success" ><i class="fa fa-pencil-square-o
+                                                        f044"></i></button>
+                                                    </form>
+                                                </td>
+                                                <?php
+                                            }
+
+                                        }
+                                        ?>
+                                    </tr>
+                                    <?php 
+                                }
+                                ?>
                             </tbody>
                         </table>
-                        <p class="card-text"><?php echo 'Aucune donnée n\'a été trouvée.' ?></p>
 
-                        <?php 
-                    }?>
+                        <?php
+                    }
+                    else{
+                        if (!empty($ADS)){?>
+                        <!-- $ADS va permettre de vérifier si nous devons mettre du contenu, donc ajout, modification et suppression de données-->
+                        <div class="form-group">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-outline-secondary block btn-lg" data-toggle="modal" data-backdrop="false" data-target="#ajouter">
+                                AJOUTER UN CONTENU
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade text-left" id="ajouter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8" style="display: none;" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-secondary white">
+                                      <h4 class="modal-title" id="myModalLabel8"><?php echo 'Ajouter '.$titre ?></h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">×</span>
+                                      </button>
+                                  </div>
+
+                                  <div class="modal-body">
+                                    <section class="input-validation" id="form-control-repeater">
+                                        <div class="card">
+                                            <div class="card-content collapse show">
+                                                <div class="card-body">
+                                                    <?php $action_form="JavaScript:operation('#formajout','controlleur/{$titre}.php','#ajouter');"; ?>
+                                                    <form id="formajout" class="form" method="post" action="<?php echo $action_form;?>">
+                                                        <!--contenu du formulaire-->
 
 
-                    <!--/.row-->
-                    <div class="row">
-                        <div class="col-auto mx-auto mt-4">
-                            <nav class="font-1 mt-5" aria-label="Page navigation example">
-                                <ul class="pagination pagination justify-content-center">
-                                    <?php //echo $content->links() ?>
-                                </ul>
-                            </nav>
+                                                        <input type="text" hidden="true" id="option" class="form-control" name="add" value="add" >
+
+                                                        <?php
+                                                        /*Inclusion du formulaire*/
+                                                        include("formulaire/{$titre}-add.php"); ?>
+
+
+                                                        <div class="form-actions right">
+                                                            <button type="button" class="btn btn-warning mr-1" data-dismiss="modal">
+                                                                <i class="ft-x"></i> Fermer
+                                                            </button>
+                                                            <button type="submit" class="btn btn-secondary">
+                                                                <i class="fa fa-check-square-o"></i> Ajouter
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-
                 </div>
+                <?php 
+            }?>
+
+            <table class="table display nowrap table-striped table-bordered scroll-horizontal">
+                <thead>
+                    <tr>
+                        <!--<th></th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="card-text"><?php echo 'Aucune donnée n\'a été trouvée.' ?></p>
+
+            <?php 
+        }?>
+
+
+        <!--/.row-->
+        <div class="row">
+            <div class="col-auto mx-auto mt-4">
+                <nav class="font-1 mt-5" aria-label="Page navigation example">
+                    <ul class="pagination pagination justify-content-center">
+                        <?php //echo $content->links() ?>
+                    </ul>
+                </nav>
             </div>
         </div>
+
     </div>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -453,13 +511,13 @@ if (!(empty($data)))
   </ol>
   <div class="carousel-inner" role="listbox">
       <div class="carousel-item active">
-        <img src="assetsDashboard/assets/images/carousel/11.jpg" alt="First slide">
+        <img src="assetsDashboard/assets/images/portfolio/width-1200/portfolio-3.jpg" alt="First slide">
     </div>
     <div class="carousel-item">
-        <img src="assetsDashboard/assets/images/carousel/06.jpg" alt="Second slide">
+        <img src="assetsDashboard/assets/images/portfolio/width-1200/portfolio-3.jpg" alt="Second slide">
     </div>
     <div class="carousel-item">
-        <img src="assetsDashboard/assets/images/carousel/01.jpg" alt="Third slide">
+        <img src="assetsDashboard/assets/images/portfolio/width-1200/portfolio-3.jpg" alt="Third slide">
     </div>
 </div>
 <a class="carousel-control-prev" href="#carousel-keyboard" role="button" data-slide="prev">

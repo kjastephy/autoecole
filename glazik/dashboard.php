@@ -2,29 +2,32 @@
 session_start();
 require_once 'inc/db.php'; // Appel fichier connexion bdd
 
-?>
+if($_SESSION['type']=="admin")
+{   
+
+  ?>
 
 
-<?php include_once("dashheader.php");?>
+  <?php include_once("dashheader.php");?>
 
-<body class="vertical-layout vertical-menu-modern 2-columns <?php echo (isset($_POST['table']) && $_POST['table']=='email')? 'email-application':'';?> menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+  <body class="vertical-layout vertical-menu-modern 2-columns <?php echo (isset($_POST['table']) && $_POST['table']=='email')? 'email-application':'';?> menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-  <!-- fixed-top header-->
+    <!-- fixed-top header-->
 
-  <nav style="height: 20px" class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-semi-dark navbar-shadow">
-    <div class="navbar-wrapper">
-      <div class="navbar-header">
-        <ul class="nav navbar-nav flex-row position-relative">
-          <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-          <li class="nav-item mr-auto"><a class="navbar-brand" href=""><img class="brand-logo" alt="Auto" src="assetsDashboard/assets/images/logo/rti_logo.png">
-            <h2 class="brand-text">GLAZIK</h2></a></li>
-            <li class="nav-item d-none d-md-block nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li>
-            <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
-          </ul>
-        </div>
+    <nav style="height: 20px" class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-semi-dark navbar-shadow">
+      <div class="navbar-wrapper">
+        <div class="navbar-header">
+          <ul class="nav navbar-nav flex-row position-relative">
+            <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
+            <li class="nav-item mr-auto"><a class="navbar-brand" href=""><img class="brand-logo" alt="Auto" src="assetsDashboard/assets/images/logo/rti_logo.png">
+              <h2 class="brand-text">GLAZIK</h2></a></li>
+              <li class="nav-item d-none d-md-block nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li>
+              <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
+            </ul>
+          </div>
 
-        <div class="navbar-container content">
-          <div class="collapse navbar-collapse" id="navbar-mobile">
+          <div class="navbar-container content">
+            <div class="collapse navbar-collapse" id="navbar-mobile">
 
             <!--Logo
             <ul class="nav navbar-nav" style="display: flex;align-items: center;justify-content: center; ">
@@ -247,7 +250,20 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
                   </div>
                   <div class="p-2 bg-gradient-x-warning white media-body">
                     <h5>Nombre De Demandes</h5>
-                    <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i>55</h5>
+                    <?php 
+                            //On prend dans la base de données les informations  qui sont activées
+                    $req = $bdd->prepare('SELECT count(*) as nombre FROM clients WHERE etat= :etat');
+
+                    $req->execute(['etat' => 'demande']);
+
+                    $resultat1 = $req->fetch();
+
+                    $req->execute(['etat' => 'inscrit']);
+
+                    $resultat2 = $req->fetch();
+                    ?>
+
+                    <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i><?php echo $resultat1->nombre ?></h5>
                   </div>
                 </div>
               </div>
@@ -262,7 +278,7 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
                   </div>
                   <div class="p-2 bg-gradient-x-success white media-body">
                     <h5>Nombre De Clients</h5>
-                    <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i>55</h5>
+                    <h5 class="text-bold-400 mb-0"><i class="ft-arrow-up"></i><?php echo $resultat2->nombre ?></h5>
                   </div>
                 </div>
               </div>
@@ -273,7 +289,10 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
 
         <!-- content Ici le contenu de nos différents liens chargé avec ajax-->
         <div id="content">
-          <?php include('contenu.php'); ?>
+          <?php //include('contenu.php'); ?>
+
+          <div id="calendar"></div>
+
         </div>
       </div>
     </div>
@@ -282,4 +301,10 @@ require_once 'inc/db.php'; // Appel fichier connexion bdd
 
     <?php 
   }
-  include_once("dashfooter.php");?>
+  include_once("dashfooter.php");
+
+}else{
+  header('location: index.php');
+}
+
+?>

@@ -57,6 +57,12 @@
 
 <script src="assetsDashboard/assets/js/scripts/pages/email-application.js" type="text/javascript"></script>
 
+<script src="assetsDashboard/assets/js/scripts/extensions/fullcalendar.min.js" type="text/javascript"></script>
+<script src="assetsDashboard/assets/vendors/js/extensions/moment.min.js" type="text/javascript"></script>
+<script src="assetsDashboard/assets/vendors/js/extensions/fullcalendar.min.js" type="text/javascript"></script>
+<script src="assetsDashboard/assets/vendors/js/extensions/gcal.js" type="text/javascript"></script>
+<script src="assetsDashboard/assets/vendors/js/extensions/lang-all.js" type="text/javascript"></script>
+
 <!-- END PAGE LEVEL JS-->
 
 <script src="assetsDashboard/assets/vendors/js/forms/icheck/icheck.min.js" type="text/javascript"></script>
@@ -213,7 +219,7 @@
          }
 
         /**
-        *
+        *Utiliser pour charger les pages demandées
         * 
         */
         function redirigerPage(table,titre,title,ADS,body,head,query)
@@ -230,7 +236,7 @@
         }
 
         /**
-        *
+        *FOnction pour le traitement de certaines opération avec formulaire
         * @form identifiant du formulaire  
         * @action lien du post
         * @modal identifiant du modal
@@ -260,12 +266,42 @@
 
        }
 
+       /**
+        *FOnction pour le traitement de documents
+        * @form identifiant du formulaire  
+        * @action lien du post
+        * @modal identifiant du modal
+        */
+        function operationDocument(form,action,modal)
+        {
+          //Initialisation de la session OMPAY 
+          $.ajax({
+            method:'POST',
+            url:action,
+            data: $(form).serialize(),
+            dataType:'json'
+          })
+
+         //Redirection du partenaire vers Orange
+         .done(function(data)
+         {
+          $(form).hide(); //Recharge la page
+        })
+
+         .fail(function( jqXHR, textStatus ) 
+         {
+          alert("Le serveur n'a pas pu charger les données veuillez réessayer plus tard.");
+        });
+
+       }
+
 
 
 
        $(document).ready(function() {
 
-
+///////////////////////////////////////////////////////////////////////////////////////
+/* Les boutons*/
 
         /***************************************
         ***********Section de messageie***********

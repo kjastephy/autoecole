@@ -7,7 +7,7 @@
         //ajout
         if (isset($_POST['id'])) 
         {
-            $req=$bdd->prepare('DELETE FROM email WHERE id=:id');
+            $req=$bdd->prepare('DELETE FROM document WHERE id=:id');
             $req->execute(array(
                 'id'=>$_POST['id']
             ));

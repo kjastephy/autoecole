@@ -27,16 +27,16 @@ function saveDocument()
 				if (in_array($extension_upload,
 					$extensions_autorisees))
 				{
-					if ($extension_upload=='pdf') {
-						$name=Genere_Password(30).basename($_FILES["{$inputName}"]['name']);
-				// On peut valider le fichier et le stocker définitivement
-						move_uploaded_file($_FILES["{$inputName}"]['tmp_name'], '../document/'.$name);
-					}else{
-						$name = "data:image/png;base64,".base64_encode(file_get_contents($_FILES["{$inputName}"]['tmp_name']));
-					}
+					//if ($extension_upload=='pdf') {
 
-					var_dump($_FILES["{$inputName}"]['tmp_name']);
-					var_dump($name);
+					$name=Genere_Password(30).basename($_FILES["{$inputName}"]['name']);
+				// On peut valider le fichier et le stocker définitivement
+					move_uploaded_file($_FILES["{$inputName}"]['tmp_name'], '../document/'.$name);
+
+					
+					//}else{
+						//$name = "data:image/png;base64,".base64_encode(file_get_contents($_FILES["{$inputName}"]['tmp_name']));
+					//}
 
 					$req=$bdd->prepare("INSERT INTO document (client,chemin,description) VALUES (:client,:chemin,:description)");
 					$req->execute(array(
@@ -51,7 +51,7 @@ function saveDocument()
 	}
 }
 
-if(true)
+if($_SESSION['type']=="admin")
 {        
 //ajout
 	saveDocument();

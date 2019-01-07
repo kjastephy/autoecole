@@ -6,7 +6,7 @@ require_once 'db.php'; // Appel fichier connexion bdd
 
 
 //if(isset($_POST['submitpost'])) {
-if(isset($_POST['g-recaptcha-response'])) 
+/*if(isset($_POST['g-recaptcha-response'])) 
 {
   $recaptcha = new \ReCaptcha\ReCaptcha('6Lf_IIUUAAAAALemMmYoFIhPrjQ7J_Hc3gri3xrI');
   $resp = $recaptcha->verify($_POST['g-recaptcha-response']);
@@ -28,6 +28,7 @@ if(isset($_POST['g-recaptcha-response']))
       {
         session_start();
         $_SESSION['id']=$resultat->id;
+        $_SESSION['type']=$resultat->type;
         $_SESSION['nom']=$resultat->nom;
         $_SESSION['prenom']=$resultat->prenom;
         $_SESSION['mail']=$resultat->mail;
@@ -66,7 +67,7 @@ if(isset($_POST['g-recaptcha-response']))
     }
 
 
-  }
+ /* }
   else
   {
     echo json_encode("ReCaptcha invalide");
@@ -76,7 +77,7 @@ else
 {
   echo json_encode("Veuillez cocher le ReCaptcha2");
 }
-/*}
+}
 else
 {
   echo json_encode("Veuillez cocher le ReCaptcha1");

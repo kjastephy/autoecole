@@ -2,11 +2,11 @@
 
     require_once '../inc/db.php'; // Appel fichier connexion bdd
 
-    if(true)
+    if($_SESSION['type']=="admin")
     {        
 
         //ajout
-        if (isset($_POST['add']) && isset($_POST['civilite']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['dateNaissance']) && isset($_POST['tel1']) && isset($_POST['permis'])) 
+        if (isset($_POST['add']) && isset($_POST['civilite']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['email']) && isset($_POST['dateNaissance']) && isset($_POST['tel1']) && isset($_POST['permis']) && isset($_POST['code'])) 
         {
             $req=$bdd->prepare("SELECT email FROM clients WHERE email=:email");
             $req->execute(array(
@@ -18,7 +18,7 @@
             if($donnees==null)
             {
 
-                $req=$bdd->prepare("INSERT INTO clients (civilite,nom,prenom,email,date_naissance,tel1,id_CatPermis) VALUES (:civilite,:nom,:prenom,:email,:dateNaissance,:tel1,:permis)");
+                $req=$bdd->prepare("INSERT INTO clients (civilite,nom,prenom,email,date_naissance,tel1,id_CatPermis,possede_Code) VALUES (:civilite,:nom,:prenom,:email,:dateNaissance,:tel1,:permis,:code)");
                 $req->execute(array(
                  'civilite'=>$_POST['civilite'],
                  'nom'=>$_POST['nom'],
@@ -26,6 +26,7 @@
                  'email'=>$_POST['email'],
                  'dateNaissance'=>$_POST['dateNaissance'],
                  'permis'=>$_POST['permis'],
+                 'code'=>$_POST['code'],
                  'tel1'=>$_POST['tel1']
              ));
 

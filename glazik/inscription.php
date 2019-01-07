@@ -39,9 +39,9 @@ require 'inc/header.php';
         <div class="media-container-row">
             <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
                 <ol id="info-inscription">
-                    <li><strong>ADAPTÉ AU MOBILE</strong> - Aucune action spéciale requise, tous les sites que vous créez avec Mobirise sont adaptés aux mobiles. Vous n'avez pas besoin de créer une version spéciale mobile de votre site, elle s'adaptera automagiquement. <a href="https://mobirise.co/">Essayer maintenant !</a></li>
-                    <li><strong>FACILE ET SIMPLE</strong> - Réduire le temps de développement avec l'éditeur de site Web glisser-déposer. Déposez les blocs dans la page, modifiez le contenu et publiez - aucune compétence technique requise. <a href="https://mobirise.co/">Essayer maintenant !</a></li>
-                    <li><strong>STYLES UNIQUES</strong> - choisissez parmi une vaste sélection de blocs pré-faits - intro en plein écran, carrousel bootstrap, diapositive, galerie d'images adaptatif avec lightbox, défilement parallaxe, arrière-plans vidéo, menu hamburger, en-tête sticky et plus encore. <a href="https://mobirise.co/">Essayer maintenant !</a></li>
+                    <li><strong>Etape 1 : </strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus blanditiis labore, dolore ipsum quae eos neque debitis numquam veritatis a, voluptates dignissimos ducimus maiores doloremque culpa, et earum sapiente qui!</li>
+                    <li><strong>Etape 2 : </strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem quis ab eveniet saepe, quibusdam voluptate voluptatibus maxime suscipit autem laboriosam doloremque molestiae, amet cum. Inventore est, iusto sapiente ipsa voluptate?</li>
+                    <li><strong>Etape 3 : </strong> - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto ullam saepe labore. Incidunt molestias consequatur iste beatae eius. Reiciendis deserunt labore minus iusto veniam nemo! Esse eius ducimus, molestias cum.</li>
                 </ol>
                 <p id="message-inscription"></p>
             </div>
@@ -134,6 +134,20 @@ require 'inc/header.php';
 
                             </div>
 
+                            <div class="form-group">
+
+                                <label class="form-control-label mbr-fonts-style display-7" for="permis-form1-1h">
+                                Possède Code </label>
+
+                                <select class="form-control" name="code" id="code"  required="">
+
+                                    <option value="Oui">Oui</option>
+                                    <option value="Non">Non</option>
+
+                                </select>
+
+                            </div>
+
                         </div>
                         
                     </div>
@@ -145,6 +159,7 @@ require 'inc/header.php';
         </div>
     </div>
 </div>
+
 </section>
 
 <?php require 'inc/footer.php'; ?>

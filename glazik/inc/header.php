@@ -90,7 +90,7 @@
             </li> 
             
             <?php
-            if (isset($_SESSION['logged']) || $_SESSION['logged']) { // Quand il y'a session (Compte Utilisateur / Déconnexion)
+            if (isset($_SESSION['logged']) && $_SESSION['type']=="client") { // Quand il y'a session (Compte Utilisateur / Déconnexion)
             ?><li class="nav-item">
               <a class="nav-link link text-black display-4" href="myaccount_clients.php" aria-expanded="false">Envoyer Document</a>
             </li>
@@ -107,7 +107,7 @@
 
             <?php 
 
-          if(!isset($_SESSION['logged']) || !$_SESSION['logged']){ // Quand il n'y'a pas de session (Connexion / Inscription)
+          if(!isset($_SESSION['logged'])){ // Quand il n'y'a pas de session (Connexion / Inscription)
 
           ?>
 
@@ -176,9 +176,9 @@
 
           <?php
 
-            } else  if (isset($_SESSION['logged']) || $_SESSION['logged']) { // Quand il y'a session (Compte Utilisateur / Déconnexion)
+            } else  if (isset($_SESSION['logged'])) { // Quand il y'a session (Compte Utilisateur / Déconnexion)
             ?>
-            <a class="btn btn-sm btn-primary display-4" href="myaccount_clients.php"><span class="mbri-user mbr-iconfont mbr-iconfont-btn" style="font-size: 18px;"></span> <?php echo $_SESSION['login'] ?></a>
+            <a class="btn btn-sm btn-primary display-4" href="myaccount_clients.php"><span class="mbri-user mbr-iconfont mbr-iconfont-btn" style="font-size: 18px;"></span> <?php echo $_SESSION['nom'] ?></a>
             
 
             <a class="btn btn-sm btn-primary display-4" href="inc/deconnexion.php"><span class="mbri-logout mbr-iconfont mbr-iconfont-btn" style="font-size: 15px;"></span>Déconnexion<br></a>   
@@ -233,7 +233,7 @@
           //Vérifie si l'utilisateur est un administrateur ou un client
           if(data=="admin"){
             $(location).attr("href", "../glazik/dashboard.php");
-          }else if(data=="autre"){
+          }else if(data=="client"){
             $(location).attr("href", "../glazik/");
           }else{
             $("#Myerror").html(data);

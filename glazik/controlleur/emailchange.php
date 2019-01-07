@@ -2,7 +2,7 @@
 
     require_once '../inc/db.php'; // Appel fichier connexion bdd
 
-    if(true)
+    if($_SESSION['type']=="admin")
     {        
         //ajout
         if (isset($_POST['id'])) 
